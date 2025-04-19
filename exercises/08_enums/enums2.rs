@@ -4,9 +4,21 @@ struct Point {
     y: u64,
 }
 
+// #[derive(Debug)]
+// struct ResizePoint {
+//     width: u8,
+//     height: u8,
+// }
+
 #[derive(Debug)]
 enum Message {
-    // TODO: Define the different variants used below.
+    // TODO: Define the different variants used below.,
+    Move(Point),
+    Echo(String),
+    ChangeColor(u8, u8, u8),
+    Quit,
+    Resize { width: u8, height: u8 }
+    // Resize(ResizePoint)
 }
 
 impl Message {
@@ -21,6 +33,10 @@ fn main() {
             width: 10,
             height: 30,
         },
+        // Message::Resize(ResizePoint {
+        //     width: 10,
+        //     height: 30,
+        // }),
         Message::Move(Point { x: 10, y: 15 }),
         Message::Echo(String::from("hello world")),
         Message::ChangeColor(200, 255, 255),
