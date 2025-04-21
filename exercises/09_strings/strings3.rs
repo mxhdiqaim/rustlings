@@ -1,17 +1,29 @@
 fn trim_me(input: &str) -> &str {
     // TODO: Remove whitespace from both ends of a string.
+    input.trim()
 }
 
 fn compose_me(input: &str) -> String {
     // TODO: Add " world!" to the string! There are multiple ways to do this.
+    //  let first_word = String::from("hello");
+    let second_word = String::from(" world!");
+
+    input.to_owned() + &second_word
 }
 
 fn replace_me(input: &str) -> String {
     // TODO: Replace "cars" in the string with "balloons".
+    input.replace("cars", "balloons")
 }
 
 fn main() {
     // You can optionally experiment here.
+    let first_word = String::from("hello");
+    let second_word = String::from(" world!");
+
+    let concat_word = first_word + &second_word;
+
+    println!("concat word {}", concat_word);
 }
 
 #[cfg(test)]
