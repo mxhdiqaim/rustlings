@@ -17,6 +17,7 @@
 //   the first element is the string, the second one is the command.
 // - The output element is going to be a vector of strings.
 
+#[derive(Debug)]
 enum Command {
     Uppercase,
     Trim,
@@ -27,17 +28,57 @@ mod my_module {
     use super::Command;
 
     // TODO: Complete the function as described above.
-    // pub fn transformer(input: ???) -> ??? { ??? }
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> { 
+        println!("input print {:?}", input);
+        let mut output: Vec<String> = Vec::new();
+
+        for (string, command) in input.iter() {
+            let match_s = match command {
+                Command::Uppercase => string.to_uppercase(),
+                Command::Trim => string.trim().into(),
+                Command::Append(i) => string.to_owned() + &"bar".repeat(*i)
+            };
+
+            output.push(match_s);
+        }
+
+        output
+     }
 }
 
 fn main() {
     // You can optionally experiment here.
+    let input = vec![
+            ("hello".to_string(), Command::Uppercase),
+            (" all roads lead to rome! ".to_string(), Command::Trim),
+            ("foo".to_string(), Command::Append(1)),
+            ("bar".to_string(), Command::Append(5)),
+        ];
+    println!("input test 2 {:?}", input);
+    
+    transformer_2(input);
+        
+}
+
+fn transformer_2(input: Vec<(String, Command)>) -> Vec<String> {
+    let mut v: Vec<String> = Vec::new();
+     
+     for (string, command) in input.iter() {
+        let match_s = match command {
+            &Command::Uppercase => string.to_uppercase(),
+            &Command::Trim => string.trim().into(),
+            &Command::Append(i) => string.to_owned() + &"bar".repeat(i),
+        };
+        v.push(match_s);
+     }
+
+    v
 }
 
 #[cfg(test)]
 mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
-    // use ???;
+    use crate::my_module::transformer;
     use super::Command;
 
     #[test]
@@ -49,6 +90,8 @@ mod tests {
             ("bar".to_string(), Command::Append(5)),
         ];
         let output = transformer(input);
+
+        
 
         assert_eq!(
             output,
